@@ -1,0 +1,57 @@
+schema_version: "1.0.0"
+slug: "caipe"
+name: "CAIPE"
+description: "CAIPE is a self-hosted, open-source AI agent platform that provides a shared control plane for building, governing, and operating agents and workflows across cloud-native engineering systems."
+type: "platform"
+
+maturity_log:
+  - phase: "sandbox"
+    date: "2026-09-28T00:00:00Z"
+    issue: "https://github.com/cncf/sandbox/issues/528"
+
+repositories:
+  - url: "https://github.com/caipe-io/ai-platform-engineering"
+    primary: true
+  - url: "https://github.com/caipe-io/caipe-cli"
+  - url: "https://github.com/caipe-io/governance"
+  - url: "https://github.com/caipe-io/agentic-apps"
+  - url: "https://github.com/caipe-io/caipe-sandbox"
+
+website: "https://caipe.io/"
+adopters:
+  path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/ADOPTERS.md"
+
+security:
+  policy:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/SECURITY.md"
+  contact:
+    email: "caipe-security@googlegroups.com"
+
+governance:
+  contributing:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/CONTRIBUTING.md"
+  governance_doc:
+    path: "https://github.com/caipe-io/governance/blob/main/CHARTER.md"
+  decision_making_process:
+    path: "https://github.com/caipe-io/governance/blob/main/DECISION-MAKING.md"
+  roles_and_teams:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/MAINTAINERS.md"
+  code_of_conduct:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/CODE_OF_CONDUCT.md"
+
+legal:
+  license:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/LICENSE"
+  identity_type:
+    has_dco: true
+    has_cla: false
+    dco_url:
+      path: "https://developercertificate.org/"
+
+documentation:
+  readme:
+    path: "https://github.com/caipe-io/ai-platform-engineering/blob/main/README.md"
+
+landscape:
+  category: "Provisioning"
+  subcategory: "Automation & Configuration"

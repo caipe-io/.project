@@ -1,0 +1,19 @@
+# Keep membership aligned with the public project roster:
+# https://github.com/caipe-io/ai-platform-engineering/blob/main/MAINTAINERS.md
+maintainers:
+  - project_id: "caipe"
+    org: "caipe-io"
+    teams:
+      - name: "caipe-maintainers"
+        managed: true
+        members:
+          - "adickinson72"
+          - "artdroz"
+          - "cisco-erilutz"
+          - "csantanapr"
+          - "haskalpa"
+          - "kevkantes"
+          - "niallthomson"
+          - "sriaradhyula"
+          - "subbaksh"
+          - "suwhang-cisco"

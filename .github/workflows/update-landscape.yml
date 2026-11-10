@@ -1,0 +1,37 @@
+name: Update Landscape
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'project.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      LANDSCAPE_REPO_TOKEN: ${{ secrets.LANDSCAPE_REPO_TOKEN }}
+    steps:
+      - name: Check Landscape token configuration
+        if: env.LANDSCAPE_REPO_TOKEN == ''
+        run: echo "::notice::Landscape synchronization is skipped until LANDSCAPE_REPO_TOKEN is configured."
+
+      - name: Checkout
+        if: env.LANDSCAPE_REPO_TOKEN != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Update Landscape
+        if: env.LANDSCAPE_REPO_TOKEN != ''
+        uses: cncf/automation/.github/actions/landscape-update@c584e33007091dfbf9a3355bc37b9eb9a12bb45d
+        with:
+          token: ${{ secrets.LANDSCAPE_REPO_TOKEN }}

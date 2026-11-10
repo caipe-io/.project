@@ -1,0 +1,57 @@
+name: Validate Project Metadata
+
+on:
+  pull_request:
+    paths:
+      - 'org.yaml'
+      - 'project.yaml'
+      - 'maintainers.yaml'
+      # Multi-project repositories keep each project in its own directory,
+      # exactly one level deep.
+      - '*/project.yaml'
+      - '*/maintainers.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'org.yaml'
+      - 'project.yaml'
+      - 'maintainers.yaml'
+      - '*/project.yaml'
+      - '*/maintainers.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: cncf/automation/.github/actions/validate-project@c584e33007091dfbf9a3355bc37b9eb9a12bb45d
+        # No project_file input: the action discovers the repository layout,
+        # so this step is identical for single- and multi-project repositories.
+        with:
+          # Fail on links this pull request adds that return 404.
+          check_links: 'true'
+
+  validate-maintainers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: cncf/automation/.github/actions/validate-maintainers@c584e33007091dfbf9a3355bc37b9eb9a12bb45d
+        with:
+          # No maintainers_file input: the action discovers every maintainers
+          # file in the repository.
+          # Disabled until the LFX LLT issue is resolved. Validation is done manually for now.
+          verify_maintainers: 'false'
+          # Fail on handles this pull request adds that are not GitHub accounts.
+          check_links: 'true'
+        env:
+          LFX_AUTH_TOKEN: ${{ secrets.LFX_AUTH_TOKEN }}
